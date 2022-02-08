@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap 4 Website Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+        .fakeimg {
+            height: 200px;
+            background: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+    <h1>My First Bootstrap 4 Page</h1>
+    <p>Resize this responsive page to see the effect!</p>
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h2>Dark Striped Table</h2>
+    <p>Combine .table-dark and .table-striped to create a dark, striped table:</p>
+
+    <input type="text" class="form-control" placeholder="search" name="name" id="findName" oninput="search()">
+    <button type="button" class="btn btn-success" onclick="search()">Find</button>
+
+    <table class="table table-dark table-striped">
+
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>price</th>
+            <th>quantity</th>
+            <th>description</th>
+            <th>view</th>
+            <th>category</th>
+            <th>Edit</th>
+            <th>Delete</th>
+
+        </tr>
+        </thead>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+            create account
+        </button>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<!--create account-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">create product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="name">name:</label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="price">price:</label>
+                    <input type="text" class="form-control" id="price">
+                </div>
+                <div class="form-group">
+                    <label for="quantity">quantity:</label>
+                    <input type="number" class="form-control" id="quantity">
+                </div>
+                <div class="form-group">
+                    <label for="description">description:</label>
+                    <input type="text" class="form-control" id="description">
+                </div>
+                <div class="form-group">
+                    <label for="view">view:</label>
+                    <input type="number" class="form-control" id="view">
+                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="img">img:</label>-->
+<!--                    <input type="text" class="form-control" id="img">-->
+<!--                </div>-->
+                <div class="form-group">
+                    <label>category:</label>
+                    <select id="idcategory">
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="create()" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--edit product-->
+
+<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                    <input type="text" class="form-control" id="id" hidden>
+                <div class="form-group">
+                    <label for="nameEdit">name:</label>
+                    <input type="text" class="form-control" id="nameEdit">
+                </div>
+                <div class="form-group">
+                    <label for="priceEdit">price:</label>
+                    <input type="text" class="form-control" id="priceEdit">
+                </div>
+                <div class="form-group">
+                    <label for="quantityEdit">quantity:</label>
+                    <input type="number" class="form-control" id="quantityEdit">
+                </div>
+                <div class="form-group">
+                    <label for="descriptionEdit">description:</label>
+                    <input type="text" class="form-control" id="descriptionEdit">
+                </div>
+                <div class="form-group">
+                    <label for="viewEdit">view:</label>
+                    <input type="number" class="form-control" id="viewEdit">
+                </div>
+                <!--                <div class="form-group">-->
+                <!--                    <label for="img">img:</label>-->
+                <!--                    <input type="text" class="form-control" id="img">-->
+                <!--                </div>-->
+                <div class="form-group">
+                    <label>category:</label>
+                    <select id="idcategoryEdit">
+                    </select>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="saveEdit()" data-dismiss="modal">enter -> edit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--delete account-->
+
+<div class="modal fade" id="myModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">bạn có chắc muỗn xóa không</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <input type="text" class="form-control" id="idDelete" hidden>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="deleteProduct()" data-dismiss="modal">enter -> delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+    <p>Footer</p>
+</div>
+</body>
+</html>
+<script>
+
+    let totalPages = 1;
+
+    function show(pageNumber) {
+        if (pageNumber < 0) {
+            pageNumber = 0;
+        }
+        if (pageNumber > totalPages - 1) {
+            pageNumber = totalPages - 1;
+        }
+        let url = `http://localhost:8080/product?page=${pageNumber}`;
+        $.ajax({
+            type: "GET",
+            url: url,
+            //xử lý khi thành công
+            success: function (data) {
+                console.log("gọi thành công và trả về :")
+                document.getElementById("tbody").innerHTML = showData(data);
+                totalPages = data.totalPages;
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+
+    function showData(pageable) {
+        let arrProduct = pageable.content;
+        let str = "";
+
+        for (let i = 0; i < arrProduct.length; i++) {
+            str += `<tr>
+            <td>${i + 1}</td>
+            <td>${arrProduct[i].name}</td>
+            <td>${arrProduct[i].price}</td>
+            <td>${arrProduct[i].quantity}</td>
+            <td>${arrProduct[i].description}</td>
+            <td>${arrProduct[i].view}</td>
+            <td>${arrProduct[i].category.name}</td>
+             <td><button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModalEdit" onclick="showEdit(${arrProduct[i].id})">Edit Staff</button></td>
+             <td><button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModalDelete" onclick="showDelete(${arrProduct[i].id})">Delete Staff</button></td>
+            </tr>`
+
+        }
+        str += `<button onclick="show(${pageable.number - 1})">Back</button>
+                 <span>${pageable.number + 1}</span>/<span>${pageable.totalPages}</span>
+                 <button onclick="show(${pageable.number + 1})">Next</button>`
+        return str;
+    }
+
+    show(0);
+
+    function selectCategory() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/product/category",
+            success: function (data) {
+                let str = "";
+                for (let i = 0; i < data.length; i++) {
+                    str += `<option value="${data[i].id}">${data[i].name}</option>`
+                }
+                document.getElementById("idcategory").innerHTML = str;
+                document.getElementById("idcategoryEdit").innerHTML = str;
+                document.getElementById("idcategoryDelete").innerHTML = str;
+            },
+
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+
+    selectCategory();
+
+    // function showImg(idProduct) {
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "http://localhost:8080/product/img",
+    //
+    //         success: function (data) {
+    //             let str = "";
+    //             for (let i = 0; i < data.length; i++) {
+    //
+    //                 str += `<img src="${data[i].id}">${data[i].img}</img>`
+    //             }
+    //             document.getElementById("idimg").innerHTML = str;
+    //             // document.getElementById("idCEdit").innerHTML = str;
+    //             // document.getElementById("idRoleDelete").innerHTML = str;
+    //         },
+    //
+    //         error: function (err) {
+    //             console.log(err)
+    //         }
+    //     })
+    // }
+    //
+    // showImg();
+
+    function search() {
+        let name = document.getElementById("findName").value;
+        let url = `http://localhost:8080/find/${name}`;
+
+        $.ajax({
+            headers: {
+                'Accept': 'application/json'
+            },
+            type: "GET",
+            url: url,
+            //xử lý khi thành công
+            success: function (data) {
+                document.getElementById("tbody1").innerHTML = showData(data);
+                console.log(url);
+                console.log(data)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+
+    function create() {
+        let name = document.getElementById("name").value;
+        let price = document.getElementById("price").value;
+        let quantity = document.getElementById("quantity").value;
+        let description = document.getElementById("description").value;
+        let view = document.getElementById("view").value;
+        let category = document.getElementById("idcategory").value;
+        let token = window.sessionStorage.getItem('TOKEN_KEY')
+        let product = {
+            name : name,
+            price: price,
+            quantity: quantity,
+            description: description,
+            view: view,
+            category: {id:category}
+        }
+        $.ajax({
+
+            type: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
+            url: "http://localhost:8080/product",
+            data: JSON.stringify(product),
+            //xử lý khi thành công
+            success: function (data) {
+                show(0)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+    function showDelete(id) {
+        let url = `http://localhost:8080/product/delete/${id}`;
+        let token = window.sessionStorage.getItem('TOKEN_KEY')
+        $.ajax({
+            headers: {
+                'Accept': 'application/json'
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
+            type: "GET",
+            url: url,
+            //xử lý khi thành công
+            success: function (data) {
+                console.log(data)
+                document.getElementById("idDelete").value= data.id;
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+
+    function deleteProduct() {
+        let id = document.getElementById("idDelete").value;
+        let url = `http://localhost:8080/product/${id}`;
+        let token = window.sessionStorage.getItem('TOKEN_KEY')
+
+        $.ajax ({
+            headers: {
+                'Accept': 'application/json'
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
+            type: "DELETE",
+            url: url,
+            success: function (data) {
+                show(0)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+
+    function showEdit(id) {
+        let url = `http://localhost:8080/product/${id}`;
+        let token = window.sessionStorage.getItem('TOKEN_KEY')
+
+        $.ajax({
+            headers: {
+                'Accept': 'application/json'
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
+            type: "GET",
+            url: url,
+            //xử lý khi thành công
+            success: function (data) {
+                console.log(data)
+                document.getElementById("id").value= data.id;
+                document.getElementById("nameEdit").value= data.name;
+                document.getElementById("priceEdit").value= data.price;
+                document.getElementById("quantityEdit").value= data.quantity;
+                document.getElementById("descriptionEdit").value= data.description;
+                document.getElementById("viewEdit").value= data.view;
+                document.getElementById("idcategoryEdit").value= data.category.id;
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+
+    function saveEdit() {
+        let idProduct = document.getElementById("id").value;
+        let url = `http://localhost:8080/product/${idProduct}`
+        let token = window.sessionStorage.getItem('TOKEN_KEY')
+
+        let product = {
+            id: idProduct,
+            name: document.getElementById("nameEdit").value,
+            price: document.getElementById("priceEdit").value,
+            quantity: document.getElementById("quantityEdit").value,
+            description: document.getElementById("descriptionEdit").value,
+            view: document.getElementById("viewEdit").value,
+            category: {
+                id:document.getElementById("idcategoryEdit").value
+            }
+        }
+
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
+            data: JSON.stringify(product),
+            type: "PUT",
+            url: url ,
+            //xử lý khi thành công
+            success: function (data) {
+                alert("update thành công");
+                show(0);
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+
+
+
+</script>
